@@ -6,8 +6,10 @@
     <title>All Items</title>
 </head>
 <body>
-    I am the items.html template
-    {% for item in Items %}
+    I am the items.html template<br><br>
+
+    {% for item in items %}
+        {{ item._id }}<br>
         {{ item.item_user_email }}<br>
         {{ item.item_title }}<br>
         {{ item.item_description }}<br>

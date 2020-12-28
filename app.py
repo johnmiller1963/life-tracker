@@ -21,7 +21,6 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_items")
 def get_items():
-    return "I am in the app.py file"
     items = mongo.db.tbl_items.find()
     return render_template("items.html", items=items)
 
