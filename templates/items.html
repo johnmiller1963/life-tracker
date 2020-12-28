@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    <h2>I am the items.html template</h2>
-
     {% for item in items %}
         {{ item._id }}<br>
         {{ item.item_user_email }}<br>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
@@ -16,15 +16,14 @@
             <div class="nav-wrapper orange">
             <!-- <a href="#!" class="brand-logo right">Logo</a> -->
             <ul class="left orange">
-                <li><a href="sass.html"><i class="material-icons left">home</i>Home</a></li>
-                <li><a href="badges.html"><i class="material-icons left">folder_shared</i>Login</a></li>
-                <li><a href="badges.html"><i class="material-icons left">folder_special</i>Register</a></li>
-                <li><a href="badges.html"><i class="material-icons left">sentiment_very_satisfied</i>Demo</a></li>
+                <li><a href="{{ url_for('show_home') }}"><i class="material-icons left">home</i>Home</a></li>
+                <li><a href="#"><i class="material-icons left">folder_shared</i>Login</a></li>
+                <li><a href="#"><i class="material-icons left">folder_special</i>Register</a></li>
+                <li><a href="#"><i class="material-icons left">sentiment_very_satisfied</i>Demo</a></li>
             </ul>
             </div>
         </nav>
     </header>
-    <h1>I'm part of the base template</h1>
 
     {% block content %}
     {% endblock %}
