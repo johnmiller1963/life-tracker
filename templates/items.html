@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Items</title>
-</head>
-<body>
-    I am the items.html template<br><br>
+{% extends "base.html" %}
+{% block content %}
+    <h3>I am the items.html template</h3>
 
     {% for item in items %}
         {{ item._id }}<br>
@@ -16,5 +10,4 @@
         {{ item.item_recurs }}<br>
         {{ item.item_expiry_date }}<br>
     {% endfor %}
-</body>
-</html>
+{% endblock %}
