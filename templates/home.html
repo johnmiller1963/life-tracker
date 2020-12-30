@@ -1,7 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
-    <h4>This is the home page section, an introduction to the app</h4>    
-    
+    <h5 class="centered-text">This is the home page section, an introduction to the app</h5>   
+    <div class="container"> 
+        <div class="row">
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ url_for('static', filename='media/images/luggage.jpg') }}">
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Ever lost your travel luggage?<i class="material-icons right">more_vert</i></span>
+                    <p><a href="#">Open the demo account</a></p>
+                    </div>
+                    <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Ever lost your travel luggage?<i class="material-icons right">close</i></span>
+                    <p>We have, and we'd bet that even if you haven't you know someone who has? <br> Did you know that in order to claim from the airlines or even your own travel insurance that you need to produce receipts for everything you have lost! <br>Do you have the receipts for that 3-pack of socks you bought 2 years ago, don't you?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ url_for('static', filename='media/images/receipts.jpg') }}">
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">File all those purchase receipts easily!<i class="material-icons right">more_vert</i></span>
+                    <p><a href="#">Open the demo account</a></p>
+                    </div>
+                    <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">File all those purchase receipts easily!<i class="material-icons right">close</i></span>
+                    <p>Do you keep all the receipts for your purchased devices, hardware etc? <br>Simply use your phone to snap all receipts for goods and services and instantly file them away in Life Tracker.  <br>Then if the item breaks in 11 months time you can easily retrieve a copy of the receipt to claim on the manufacturers warranty.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ url_for('static', filename='media/images/insurance.jpg') }}">
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Home and car bills, passport renewal?<i class="material-icons right">more_vert</i></span>
+                    <p><a href="#">Open the demo account</a></p>
+                    </div>
+                    <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Home and car bills, passport renewal?<i class="material-icons right">close</i></span>
+                    <p>So many of our regular bills can be paid for annually.  <br>Use Life Tracker to get accurate reminders when all of these items will be requiring renewal.  Home insurance, Council tax, TV license, car insurance, MOT test, car tax, annual servicing.  Some items last several years but you still need a reminder, passport, driving license, EIHC card.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ url_for('static', filename='media/images/warranty.jpg') }}">
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Got any extended warranties?<i class="material-icons right">more_vert</i></span>
+                    <p><a href="#">Open the demo account</a></p>
+                    </div>
+                    <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Got any extended warranties?<i class="material-icons right">close</i></span>
+                    <p>Many manufacturers offer free or paid options for extended warranties, but they know that after 2 or 3 years very few people claim on these offers. <br>Use Life tracker to keep a record of purchase date, purchase place, warranty included and warranty expiration date. <br>Get reminders when the warranty offered will expire, is your device still working as expected?  If not get value for money by contacting the manufacturer before the expiration date.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 
