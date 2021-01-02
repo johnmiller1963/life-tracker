@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    <h5 class="centered-text">This is the home page section, an introduction to the app</h5>   
+
     <div class="container"> 
+    <h5 class="centered-text"><br>These a few of the common uses for Life Tracker, but feel free to invent your own!</h5>
         <div class="row">
             <div class="col s12 m6 l4">
                 <div class="card medium hoverable">
@@ -75,6 +76,21 @@
                     <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Do you pay for home insurance?<i class="material-icons right">close</i></span>
                     <p>A burglary at your property is a terrible experience and if you didn't have home insuranace the value of stolen goods is lost. <br>If you did have home insurance, you will need to produce receipts for all of the stolen items in order to claim.  <br>Life Tracker can't stop these things from happening, but it can help to make the aftermath easier to deal with.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6 l4">
+                <div class="card medium hoverable">
+                    <div class="card-image waves-effect waves-block waves-light">
+                    <img class="activator" src="{{ url_for('static', filename='media/images/moving.jpg') }}">
+                    </div>
+                    <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">Moving home can be really stressful<i class="material-icons right">more_vert</i></span>
+                    <p><a href="#">Open the demo account</a></p>
+                    </div>
+                    <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Moving home can be really stressful<i class="material-icons right">close</i></span>
+                    <p>We all know that moving home can be incredibly stressful, create a list of date ordered tasks in Life Tracker to ensure you don't forget to do anything. <br>Redirecting mail, contacting utility suppliers, updating your employers HR records, telling your bank.  All easy items to overlook in the process of moving, use Life Tracker to reduce your stress!</p>
                     </div>
                 </div>
             </div>
