@@ -11,6 +11,10 @@ nav li {
     text-align: center;
 }
 
+.small-text {
+    font-size: xx-small;
+}
+
 .page-footer {
     background-color: #ef6c00;
 }
@@ -88,3 +92,6 @@ body, html {
   color: white;
 }
 
+i.icon-grey {
+    color: grey;
+}

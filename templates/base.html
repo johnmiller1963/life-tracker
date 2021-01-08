@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
@@ -21,7 +21,7 @@
                 <ul class="left">
                     <li><a href="{{ url_for('show_home') }}"><i class="active material-icons left hide-on-small-only">home</i>Home</a></li>
                     <li><a href="#"><i class="material-icons left hide-on-small-only">folder_shared</i>Login</a></li>
-                    <li><a href="#"><i class="material-icons left hide-on-small-only">folder_special</i>Register</a></li>
+                    <li><a href="{{ url_for('register') }}"><i class="material-icons left hide-on-small-only">folder_special</i>Register</a></li>
                     <li><a href="#"><i class="material-icons left hide-on-small-only">sentiment_very_satisfied</i>Demo</a></li>
                 </ul>
                 </div>
