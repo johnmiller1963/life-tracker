@@ -7,34 +7,36 @@
         <form method="POST" action="{{ url_for('register') }}">
             <div class="row">
                 <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                <i class="material-icons prefix icon-grey">email</i>
-                <input id="user_email" name="user_email" type="email" class="validate">
-                <label for="user_email">Enter a valid Email</label>
-            </div>
-            <div class="row">
-                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                <i class="material-icons prefix icon-grey">account_circle</i>
-                <input id="user_display_name" name="user_display_name" type="text" class="validate">
-                <label for="user_display_name">Display Name</label>
-            </div>
-            <div class="row">
-                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                <i class="material-icons prefix icon-grey">verified_user</i>
-                <input id="user_password" name="user_password" type="password" class="validate">
-                <label for="user_password">Password</label>
-            </div>
-            <div class="row">
-                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                <i class="material-icons prefix icon-grey">verified_user</i>
-                <input id="user_password_validate" name="user_password_validate" type="password" class="validate">
-                <label for="user_password_validate">Confirm Password</label>
-            </div>
-            <div class="row center">
-                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                <p class="centered-text small-text">
-                    These are the standard terms and conditions for using Life Tracker
-                </p>
+                    <i class="material-icons prefix icon-grey">email</i>
+                    <input id="user_email" name="user_email" type="email" class="validate" required="" aria-required="true">
+                    <label for="user_email">Enter a valid Email</label>
                 </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
+                    <i class="material-icons prefix icon-grey">account_circle</i>
+                    <input id="user_display_name" name="user_display_name" type="text" class="validate" required="" aria-required="true">
+                    <label for="user_display_name">Display Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
+                    <i class="material-icons prefix icon-grey">verified_user</i>
+                    <input id="user_password" name="user_password" type="password" class="validate" required="" aria-required="true">
+                    <label for="user_password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
+                    <i class="material-icons prefix icon-grey">verified_user</i>
+                    <input id="user_password_validate" name="user_password_validate" type="password" class="validate" required="" aria-required="true">
+                    <label for="user_password_validate">Confirm Password</label>
+                </div>
+            </div>
+            <div class="row center input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
+                    <p class="centered-text small-text">
+                        These are the standard terms and conditions for using Life Tracker. <br> Only create your Life Tracker account if you trust us, but we are good people.
+                    </p>
             </div>
             <div class="row center">
                 <p>
@@ -52,16 +54,42 @@
 
 <script>
     function EnableRegistration() {
-        alert("Enable button...");
-        var button = document.getElementById("btnTandCs");
+    var button = document.getElementById("btnTandCs");
+    var email = document.getElementById("user_email").value;
+    var username = document.getElementById("user_display_name").value;
+    var pw = document.getElementById("user_password").value;
+    var pw_validate = document.getElementById("user_password_validate").value;       
+    var valid = true;
 
-        button.classList.toggle('disabled');
+        if (validateEmail(email) == false) {
+            valid = false;
+        }
+
+        if (username.length == 0) {
+            valid = false;
+        }
+
+        if (pw.length > 0) {
+            if (pw != pw_validate) {
+                valid = false;
+                document.getElementById("user_password_validate").classList.add("invalid");
+            }
+        } else {
+            valid = false;
+        }
+
+        if (valid) {
+            button.classList.toggle('disabled');
+        } else {
+            alert("There ia a problem with the data entered!");
+            document.getElementById("chkTerms").checked = false;
+        }
     }
 
-
-    function SubmitRegistration() {
-        alert("Submit Registration...");
-
+    function validateEmail(email) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
     }
+
 </script>
 {% endblock %}
