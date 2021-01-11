@@ -2,21 +2,14 @@
 {% block content %}
 
     <div class="container">
-        <h5 class="center page-header">Enter your details here to create a new Life Tracker account</h5>
+        <h5 class="center page-header">Enter your logon details here to view your Life Tracker data</h5>
             
-        <form method="POST" action="{{ url_for('register') }}">
+        <form method="POST" action="{{ url_for('logon') }}">
             <div class="row">
                 <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
                     <i class="material-icons prefix icon-grey">email</i>
                     <input id="user_email" name="user_email" type="email" class="validate" required="" aria-required="true">
-                    <label for="user_email">Enter a valid Email</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                    <i class="material-icons prefix icon-grey">account_circle</i>
-                    <input id="user_display_name" name="user_display_name" type="text" class="validate" minlength="6" required="" aria-required="true">
-                    <label for="user_display_name">Display Name (min 6 chars)</label>
+                    <label for="user_email">Enter your Email</label>
                 </div>
             </div>
             <div class="row">
@@ -26,26 +19,13 @@
                     <label for="user_password">Password (min 6 chars)</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
-                    <i class="material-icons prefix icon-grey">verified_user</i>
-                    <input id="user_password_validate" name="user_password_validate" type="password" minlength="6" class="validate" required="" aria-required="true">
-                    <label for="user_password_validate">Confirm Password</label>
-                </div>
-            </div>
             <div class="row center input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
                     <p class="centered-text small-text">
-                        These are the standard terms and conditions for using Life Tracker. <br> Only create your Life Tracker account if you trust us, but we are good people.
+                        These are the standard terms and conditions for using Life Tracker. <br> Only use your Life Tracker account if you trust us, but we are good people.
                     </p>
             </div>
             <div class="row center">
-                <p>
-                <label>
-                    <input type="checkbox" id="chkTerms" class="filled-in" onclick="EnableRegistration()" />
-                    <span>Accept Terms?</span>
-                </label>
-                </p>
-                <button class="btn waves-effect waves-light orange darken-1 disabled" id="btnTandCs" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light orange darken-1 default" id="btnTandCs" type="submit" name="action">Submit
                     <i class="material-icons right">send</i>
                 </button>
             </div>  

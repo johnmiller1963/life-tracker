@@ -33,9 +33,14 @@ body, html {
     height: 100%;
 }
 
+.header-block {
+    position: relative;
+}
+
 .hero-image {
     background-repeat: no-repeat;
     background-position: center center;
+    position: relative;
     -webkit-background-size: cover;
     background-size: cover;
     object-fit: cover;
@@ -44,10 +49,10 @@ body, html {
 
 /* Place text in the middle of the image */
 .hero-image .hero-text {
-    max-width: 100%;
+    max-width: 90%;
     text-align: center;
     position: absolute;
-    top: 100px;
+    top: 45px;
     left: 50%;
     transform: translate(-50%);
     color: white;
@@ -93,5 +98,13 @@ body, html {
 }
 
 i.icon-grey {
-    color: grey;
+    color: rgb(128, 128, 128);
+}
+
+.flask-text {
+    color: rgb(102, 102, 102);
+}
+
+.page-header {
+    color: rgb(128, 128, 128);
 }
