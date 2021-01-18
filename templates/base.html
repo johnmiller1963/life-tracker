@@ -21,7 +21,11 @@
                 <!-- <a href="#!" class="brand-logo right">Logo</a> -->
                 <ul class="left">
                     <li><a href="{{ url_for('show_home') }}"><i class="active material-icons left hide-on-small-only">home</i>Home</a></li>
-                    <li><a href="{{ url_for('logon') }}"><i class="material-icons left hide-on-small-only">folder_shared</i>Login</a></li>
+                    {% if session.user_email %}
+                        <li><a href="{{ url_for('logout') }}"><i class="material-icons left hide-on-small-only">exit_to_app</i>Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('logon') }}"><i class="material-icons left hide-on-small-only">folder_shared</i>Login</a></li>
+                    {% endif %}
                     <li><a href="{{ url_for('register') }}"><i class="material-icons left hide-on-small-only">folder_special</i>Register</a></li>
                     <li><a href="#"><i class="material-icons left hide-on-small-only">sentiment_very_satisfied</i>Demo</a></li>
                 </ul>

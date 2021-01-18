@@ -1,4 +1,5 @@
 import os
+from locale import currency
 from datetime import datetime
 from flask import (
     Flask, flash, render_template,
@@ -50,6 +51,8 @@ def register():
         # put the new user into 'session' cookie
         session["user_email"] = request.form.get("user_email").lower()
         flash("User Registration Successful!")
+        flash("Welcome, {}".format(
+            request.form.get("user_display_name")))
         #print("User Registration Successful!")
 
         # after correct registration direct user to add new items page NOT profile
@@ -92,9 +95,17 @@ def logon():
     return render_template("logon.html")
 
 
+@app.route("/logout")
+def logout():
+    session.clear()
+    flash("User logged out successfully")
+    return redirect(url_for("logon"))
+
+
 @app.route("/items")
 def items():
-    items = mongo.db.tbl_items.find()
+    print(session["user_email"])
+    items = mongo.db.tbl_items.find({"item_user_email" : session["user_email"]}).sort([("item_expiry_date", 1)])
     return render_template("items.html", items=items)
 
 
