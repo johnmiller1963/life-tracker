@@ -3,6 +3,11 @@
 
     <div class="container">
         <h5 class="center page-header">Enter your logon details here to view your Life Tracker data</h5>
+        <div class="row">
+            <div class="col12 center">
+                <p>(Register<a href="{{ url_for('register') }}" class="my-links"> here </a>to create a new Life Tracker account)</p>
+            </div>
+        </div>
             
         <form method="POST" action="{{ url_for('logon') }}">
             <div class="row">
@@ -15,8 +20,8 @@
             <div class="row">
                 <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
                     <i class="material-icons prefix icon-grey">verified_user</i>
-                    <input id="user_password" name="user_password" type="password" class="validate" minlength="6" required="" aria-required="true">
-                    <label for="user_password">Password (min 6 chars)</label>
+                    <input id="user_password" name="user_password" type="password" class="validate" required="" aria-required="true">
+                    <label for="user_password">Password</label>
                 </div>
             </div>
             <div class="row center input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
@@ -25,51 +30,11 @@
                     </p>
             </div>
             <div class="row center">
-                <button class="btn waves-effect waves-light orange darken-1 default" id="btnTandCs" type="submit" name="action">Submit
+                <button class="btn waves-effect waves-light orange darken-1 default" id="btnTandCs" type="submit" name="action">Logon
                     <i class="material-icons right">send</i>
                 </button>
             </div>  
         </form>
     </div>
 
-<script>
-    function EnableRegistration() {
-    var button = document.getElementById("btnTandCs");
-    var email = document.getElementById("user_email").value;
-    var username = document.getElementById("user_display_name").value;
-    var pw = document.getElementById("user_password").value;
-    var pw_validate = document.getElementById("user_password_validate").value;       
-    var valid = true;
-
-        if (validateEmail(email) == false) {
-            valid = false;
-        }
-
-        if (username.length == 0) {
-            valid = false;
-        }
-
-        if (pw.length > 0) {
-            if (pw != pw_validate) {
-                valid = false;
-                document.getElementById("user_password_validate").classList.add("invalid");
-            }
-        } else {
-            valid = false;
-        }
-
-        if (valid) {
-            button.classList.toggle('disabled');
-        } else {
-            alert("There ia a problem with the data entered!");
-            document.getElementById("chkTerms").checked = false;
-        }
-    }
-
-    function validateEmail(email) {
-        var re = /\S+@\S+\.\S+/;
-        return re.test(email);
-    }
-
-</script>
 {% endblock %}

@@ -103,6 +103,15 @@ i.icon-grey {
 
 .flask-text {
     color: rgb(102, 102, 102);
+    line-height: 2;
+    text-align: center;
+}
+
+.my-links {
+    /* color: rgb(70, 70, 70); */
+    color: orange;
+    line-height: 2;
+    font-style: italic;
 }
 
 .page-header {

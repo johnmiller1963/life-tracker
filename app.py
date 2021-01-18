@@ -38,20 +38,19 @@ def register():
 
         register = {
             "user_email": request.form.get("user_email").lower(),
-            "user_display_name": request.form.get("user_display_name").lower(),
+            "user_display_name": request.form.get("user_display_name"),
             "user_authorised": True,
             "user_date_joined": datetime.now(),
             "user_demo_account": False,
-            "password": generate_password_hash(
-                request.form.get("user_password"),
-                method='pbkdf2:sha256:80000')
+            "user_password_hash": generate_password_hash(
+                request.form.get("user_password"))
         }
         mongo.db.tbl_users.insert_one(register)
 
         # put the new user into 'session' cookie
         session["user_email"] = request.form.get("user_email").lower()
         flash("User Registration Successful!")
-        print("User Registration Successful!")
+        #print("User Registration Successful!")
 
         # after correct registration direct user to add new items page NOT profile
         # return redirect(url_for("profile", username=session["user"]))
@@ -62,27 +61,32 @@ def register():
 @app.route("/logon", methods=["GET", "POST"])
 def logon():
     if request.method == "POST":
-        # check if username exists in db
-        existing_user = mongo.db.users.find_one(
-            {"username": request.form.get("username").lower()})
-
+        # check if user email exists in db
+        existing_user = mongo.db.tbl_users.find_one(
+            {"user_email": request.form.get("user_email").lower()})
+        #print("The next value is the existing_user variable for email...")
+        #print(request.form.get("user_email").lower())
+        #print(existing_user["user_email"])
+        #print(existing_user["user_display_name"])
+        #print(existing_user["user_password_hash"])
+        #flash({{existing_email["user_display_name"]}})
         if existing_user:
-            # ensure hashed password matches user input
-            if check_password_hash(
-                    existing_user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        flash("Welcome, {}".format(
-                            request.form.get("username")))
-                        return redirect(url_for(
-                            "profile", username=session["user"]))
+            # check hashed password matches user input
+            #flash("Found existing user")
+            if check_password_hash(existing_user["user_password_hash"], request.form.get("user_password")):
+                session["user_email"] = request.form.get("user_email").lower()
+                flash("Welcome back, {}".format(
+                    existing_user["user_display_name"]))
+                return redirect(url_for(
+                    "items", username=session["user_email"]))
             else:
                 # invalid password match
-                flash("Incorrect Username and/or Password")
+                flash("Incorrect Email and/or Password")
                 return redirect(url_for("logon"))
 
         else:
             # username doesn't exist
-            flash("Incorrect Username and/or Password")
+            flash("Incorrect Email and/or Password")
             return redirect(url_for("logon"))
 
     return render_template("logon.html")
