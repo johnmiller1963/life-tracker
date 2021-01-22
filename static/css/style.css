@@ -121,3 +121,52 @@ i.icon-orange {
 .page-header {
     color: rgb(128, 128, 128);
 }
+
+.input-field {
+    color: rgb(128, 128, 128);
+}
+
+.item-icons {
+    margin-top: 12px;
+}
+
+.title-text {
+    font-weight: bold;
+    margin-left: 10px;
+    border-bottom: 0px solid green !important;
+}
+
+.card-data .item-text {
+    border-bottom: 0px solid green;
+}
+
+.card-footer .footer-text {
+    border-bottom: 0px solid green !important;
+}
+
+.card-footer .input-field {
+    margin-bottom: 4px !important;
+}
+
+.card-action .row {
+    margin-bottom: 0px !important;
+}
+
+.card-footer {
+    padding: 5px 10px 0px 10px !important;
+    margin-bottom: 0px !important;
+}
+
+.btn-floating {
+    background-color: #ef6c00;
+    margin-top: -35px;
+    margin-right: -60px;
+}
+
+#form-new-item {
+    margin-top: 10px;
+}
+
+#btnAddNewItem {
+    margin: 15px 0px 10px 0px;
+}

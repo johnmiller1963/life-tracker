@@ -23,6 +23,7 @@
                     <li><a href="{{ url_for('show_home') }}"><i class="active material-icons left hide-on-small-only">home</i>Home</a></li>
                     {% if session.user_email %}
                         <li><a href="{{ url_for('logout') }}"><i class="material-icons left hide-on-small-only">exit_to_app</i>Logout</a></li>
+                        <li><a href="{{ url_for('items') }}"><i class="material-icons left hide-on-small-only">storage</i>My items</a></li>
                     {% else %}
                         <li><a href="{{ url_for('logon') }}"><i class="material-icons left hide-on-small-only">folder_shared</i>Login</a></li>
                     {% endif %}

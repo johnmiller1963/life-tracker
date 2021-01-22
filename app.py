@@ -1,6 +1,7 @@
 import os
 from locale import currency
 from datetime import datetime
+from dateutil.parser import parse
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -99,13 +100,41 @@ def logon():
 def logout():
     session.clear()
     flash("User logged out successfully")
-    return redirect(url_for("logon"))
+    return redirect(url_for("show_home"))
 
 
-@app.route("/items")
+@app.route("/items", methods=["GET", "POST"])
 def items():
-    print(session["user_email"])
-    items = mongo.db.tbl_items.find({"item_user_email" : session["user_email"]}).sort([("item_expiry_date", 1)])
+    if request.method == "POST":
+        one_new_item = {
+            "item_user_email": session["user_email"].lower(),
+            "item_title": request.form.get("new_item_title"),
+            "item_description": request.form.get("new_item_description"),
+            "item_cost": request.form.get("new_item_cost"),
+            "item_start_date": datetime.now(),
+            "item_expiry_date": parse(request.form.get("new_item_expiry_date")),
+            "item_hide": "off",
+            "item_recurs_months": request.form.get("new_item_recurs_months")
+        }
+        mongo.db.tbl_items.insert_one(one_new_item)
+        flash("New item added successfully!")
+        return redirect(url_for("items", username=session["user_email"]))
+
+    items = list(mongo.db.tbl_items.find({"item_user_email": session["user_email"], "item_hide": "off"}).sort([("item_expiry_date", 1)]))
+    return render_template("items.html", items=items)
+
+
+@app.route("/delete_item", methods=["GET", "POST"])
+def delete():
+    if request.method == "POST":
+        delete_item = {"item_hide": "on"},
+        {"$set": {"_id": "5fe9b44435640f187ac1ff35"}}
+
+        mongo.db.tbl_items.update_one(delete_item)
+        flash("Item deleted successfully!")
+        return redirect(url_for("items", username=session["user_email"]))
+
+    items = list(mongo.db.tbl_items.find({"item_user_email": session["user_email"], "item_hide": "off"}).sort([("item_expiry_date", 1)]))
     return render_template("items.html", items=items)
 
 
