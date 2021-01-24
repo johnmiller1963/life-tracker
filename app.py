@@ -1,7 +1,6 @@
 import os
-from locale import currency
-from datetime import datetime
 from dateutil.parser import parse
+from datetime import datetime
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
