@@ -105,36 +105,45 @@ def logout():
 @app.route("/items", methods=["GET", "POST"])
 def items():
     if request.method == "POST":
+        if request.form.get("new_item_expiry_date"):
+            optional_expiry_date = parse(request.form.get("new_item_expiry_date"))
+        else:
+            optional_expiry_date = ""
+
+        if request.form.get("new_item_recurs_months"):
+            optional_recurs = (request.form.get("new_item_recurs_months"))
+        else:
+            optional_recurs = "0"
+
+        # print(optional_expiry_date)
         one_new_item = {
             "item_user_email": session["user_email"].lower(),
             "item_title": request.form.get("new_item_title"),
             "item_description": request.form.get("new_item_description"),
             "item_cost": request.form.get("new_item_cost"),
             "item_start_date": datetime.now(),
-            "item_expiry_date": parse(request.form.get("new_item_expiry_date")),
+            "item_expiry_date": optional_expiry_date,
             "item_hide": "off",
-            "item_recurs_months": request.form.get("new_item_recurs_months")
+            "item_recurs_months": optional_recurs
         }
         mongo.db.tbl_items.insert_one(one_new_item)
         flash("New item added successfully!")
         return redirect(url_for("items", username=session["user_email"]))
 
-    items = list(mongo.db.tbl_items.find({"item_user_email": session["user_email"], "item_hide": "off"}).sort([("item_expiry_date", 1)]))
-    return render_template("items.html", items=items)
+    items_renewables = list(mongo.db.tbl_items.find({"item_user_email": session["user_email"], "item_hide": "off", "item_recurs_months": {"$gt": "0"}}).sort([("item_expiry_date", 1)]))
+    items_warranties = list(mongo.db.tbl_items.find({"item_user_email": session["user_email"], "item_hide": "off", "item_recurs_months": "0"}).sort([("item_expiry_date", 1)]))
+    return render_template("items.html", items_renewables=items_renewables, items_warranties=items_warranties)
 
 
-@app.route("/delete_item", methods=["GET", "POST"])
-def delete():
-    if request.method == "POST":
-        delete_item = {"item_hide": "on"},
-        {"$set": {"_id": "5fe9b44435640f187ac1ff35"}}
+@app.route("/delete_item/<item_id>")
+def delete_item(item_id):
+    myquery = {"_id": ObjectId(item_id)}
+    newvalues = {"$set": {"item_hide": "on"}}
 
-        mongo.db.tbl_items.update_one(delete_item)
-        flash("Item deleted successfully!")
-        return redirect(url_for("items", username=session["user_email"]))
+    mongo.db.tbl_items.update_one(myquery, newvalues)
 
-    items = list(mongo.db.tbl_items.find({"item_user_email": session["user_email"], "item_hide": "off"}).sort([("item_expiry_date", 1)]))
-    return render_template("items.html", items=items)
+    flash("Item deleted successfully!")
+    return redirect(url_for("items", username=session["user_email"]))
 
 
 if __name__ == "__main__":

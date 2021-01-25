@@ -119,7 +119,11 @@ i.icon-orange {
 }
 
 .page-header {
-    color: rgb(128, 128, 128);
+    color: orange;
+}
+
+.demo-link {
+    color: orange;
 }
 
 .input-field {
@@ -128,16 +132,39 @@ i.icon-orange {
 
 .item-icons {
     margin-top: 12px;
+    padding-right: 8px;
 }
 
 .title-text {
     font-weight: bold;
-    margin-left: 10px;
+    padding-left: 100px;
     border-bottom: 0px solid green !important;
 }
 
+.row .title-class {
+    /* margin-left: 10px; */
+    padding-left: 20px;
+}
+
+.row .tabs {
+    background-color: rgb(240, 240, 240);
+    /* color: black; */
+}
+
+/* .carousel .carousel-item{
+  width:96%;
+} */
+
+/* .card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: -50px;
+    margin-right: 50px;
+} */
+
 .card-data .item-text {
     border-bottom: 0px solid green;
+    padding-left: 10px;
 }
 
 .card-footer .footer-text {
@@ -169,4 +196,12 @@ i.icon-orange {
 
 #btnAddNewItem {
     margin: 15px 0px 10px 0px;
+}
+
+#tabs-swipe .item-tab {
+    background-color: rgba(128, 128, 128, 0.7);
+    color: white !important;
+    font-weight: bold;
+    line-height: 1.5;
+    font-style: italic;
 }

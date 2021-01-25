@@ -7,32 +7,31 @@
     <form id="form-new-item" style="display: none;" method="POST" action="{{ url_for('items') }}">
         <div id="card-new-item" class="row card z-depth-5">
                 <div class="col s12">
-                    <div class="card-title title-class">
+                    <div class="card-title title-class-new">
                         <!-- <label for="new_item_title">Enter title of this item</label> -->
                         <label for="new_item_title">Enter title of this item</label>
-                        <input id="new_item_title" name="new_item_title" \class="input-field col s12" maxlength="80" data-length="80" placeholder="" type="text" validate>
+                        <input id="new_item_title" name="new_item_title" class="input-field col s12" maxlength="80" data-length="80" placeholder="" type="text" required="" aria-required="true" validate>
                     </div>
                 </div>
 
                 <div class="card-data col s12">
                     <div>
                         <label for="new_item_description">Item description</label>
-                        <textarea id="new_item_description" name="new_item_description" class="input-field materialize-textarea" maxlength="225" data-length="225" placeholder="" validate></textarea>
+                        <textarea id="new_item_description" name="new_item_description" class="input-field materialize-textarea" maxlength="225" data-length="225" placeholder="" required="" aria-required="true" validate></textarea>
                     </div>
                 </div>
 
                 <div class="card-action card-footer col s12">
                     <div class="row">
                         <div class="input-field col s2">
-                            <input id="new_item_cost" name="new_item_cost" type="text" class="input-field" placeholder="0" validate>
+                            <input id="new_item_cost" name="new_item_cost" type="text" class="input-field" placeholder="0" required="" aria-required="true" validate>
                             <label for="new_item_cost">Cost</label>
                         </div>
                         <div class="col s4">
-                            <!-- <input id="new_item_start_date" value="" type="text" class="input-field footer-text datepicker" disabled="disabled">
-                            <label for="new_item_start_date">Date created</label> -->
+                            
                         </div>
                         <div class="input-field col s4 centered">
-                            <input id="new_item_expiry_date" name="new_item_expiry_date" type="text" placeholder="" class="input-field datepicker">
+                            <input id="new_item_expiry_date" name="new_item_expiry_date" type="text" placeholder="" required="" aria-required="true" validate class="input-field datepicker">
                             <label for="new_item_expiry_date">Expires</label>
                         </div>
                         <div class="input-field col s2 right">
@@ -52,44 +51,107 @@
 
     <br><br>
 
-    {% for item in items %}
-        <div id="{{ item._id }}" class="row card">                
-            <div class="card-title title-class col s12">
-                <input id="item_title{{ item.item_title }}" class="input-field title-text col s4 m7 l9" value="{{ item.item_title }}" type="text" readonly>
-                <a href="#"><i class="material-icons item-icons icon-grey right">delete</i></a>
-                <a href="#"><i class="material-icons item-icons icon-grey right">queue</i></a>
-                <a href="#"><i class="material-icons item-icons icon-grey right">edit</i></a>
-            </div>
+    <div class="row">       
+        <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-1">
+            <li class="tab col"><a class="item-tab active" href="#renewables-swipe-1">Recurring Items</a></li>
+            <li class="tab col"><a class="item-tab" href="#warranties-swipe-2">Warranties</a></li>
+        </ul>
+    </div>
 
-            <div class="card-data col s12">
-                <div>
-                    <textarea id="item_description{{ item.item_description }}" class="input-field item-text materialize-textarea" readonly>{{ item.item_description }}</textarea>
-            
-                </div>
-            </div>
-
-            <div class="card-action card-footer col s12">
+    <div id="renewables-swipe-1" class="col s12 tab-border">
+        {% for item in items_renewables %}
+            <div id="{{ item._id }}" class="card">  
                 <div class="row">
-                    <div class="input-field col s2">
-                        <input id="item_cost{{ item._id }}" value="{{ item.item_cost }}" type="text" class="input-field footer-text" disabled="disabled" readonly>
-                        <label for="item_cost{{ item._id }}">Cost</label>
+                    <div class="card-title title-class col s12">
+                        <input id="item_title{{ item._id }}" class="input-field title-text col s6 m8 l10" value="{{ item.item_title }}" type="text" readonly>
+                        <a href="{{ url_for('delete_item', item_id=item._id) }}"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
+                        <a href="#"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Duplicate this item">queue</i></a>
+                        <a href="#"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Edit this item">edit</i></a>
                     </div>
-                    <div class="input-field col s4 center">
-                        <input id="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" validate readonly>
-                        <label for="item_start_date{{ item._id }}">Created</label>
+                </div>
+
+                <div class="card-data col s12">
+                    <div>
+                        <textarea id="item_description{{ item._id }}" class="input-field item-text materialize-textarea" readonly>{{ item.item_description }}</textarea>
                     </div>
-                    <div class="input-field col s4 centered">
-                        <input id="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
-                        <label for="item_expiry_date{{ item._id }}">Expires</label>
+                </div>
+
+                <div class="card-action card-footer col s12">
+                    <div class="row">
+                        <div class="input-field col s2">
+                            <input id="item_cost{{ item._id }}" value="{{ item.item_cost }}" type="text" class="input-field footer-text" disabled="disabled" readonly>
+                            <label for="item_cost{{ item._id }}">Cost</label>
+                        </div>
+                        <div class="input-field col s4 center">
+                            <input id="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" validate readonly>
+                            <label for="item_start_date{{ item._id }}">Created</label>
+                        </div>
+                        <div class="input-field col s4 centered">
+                            {% if item.item_expiry_date %}
+                                <input id="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
+                            {% else %}
+                                <input id="item_expiry_date{{ item._id }}" value="Never" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
+                            {% endif %}
+                            <label for="item_expiry_date{{ item._id }}">Expires</label>
+                        </div>
+                        <div class="input-field col s2 right">
+                            <input id="item_recurs_months{{ item._id }}" value="{{ item.item_recurs_months }}" type="number" class="input-field footer-text" disabled="disabled" readonly>
+                            <label for="item_recurs_months{{ item._id }}">Recurs</label>
+                        </div>
                     </div>
-                    <div class="input-field col s2 right">
-                        <input id="item_recurs_months{{ item._id }}" value="{{ item.item_recurs_months }}" type="number" class="input-field footer-text" disabled="disabled" readonly>
-                        <label for="item_recurs_months{{ item._id }}">Recurs</label>
+                </div>
+                <!-- </div> -->
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="warranties-swipe-2" class="col s12 tab-border">
+        {% for item in items_warranties %}
+            <div id="{{ item._id }}" class="card">
+                <div class="row">
+                    <div class="card-title title-class col s12">
+                        <input id="item_title{{ item._id }}" class="input-field title-text col s4 m7 l9" value="{{ item.item_title }}" type="text" readonly>
+                        <a href="{{ url_for('delete_item', item_id=item._id) }}"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
+                        <a href="#"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Duplicate this item">queue</i></a>
+                        <a href="#"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Edit this item">edit</i></a>
+                    </div>
+                </div>
+
+                <div class="card-data col s12">
+                    <div>
+                        <textarea id="item_description{{ item._id }}" class="input-field item-text materialize-textarea" readonly>{{ item.item_description }}</textarea>
+                    </div>
+                </div>
+
+                <div class="card-action card-footer col s12">
+                    <div class="row">
+                        <div class="input-field col s2">
+                            <input id="item_cost{{ item._id }}" value="{{ item.item_cost }}" type="text" class="input-field footer-text" disabled="disabled" readonly>
+                            <label for="item_cost{{ item._id }}">Cost</label>
+                        </div>
+                        <div class="input-field col s4 center">
+                            <input id="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" validate readonly>
+                            <label for="item_start_date{{ item._id }}">Created</label>
+                        </div>
+                        <div class="input-field col s4 centered">
+                            {% if item.item_expiry_date %}
+                                <input id="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
+                            {% else %}
+                                <input id="item_expiry_date{{ item._id }}" value="Never" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
+                            {% endif %}
+                            <label for="item_expiry_date{{ item._id }}">Expires</label>
+                        </div>
+                        <div class="input-field col s2 right">
+                            <input id="item_recurs_months{{ item._id }}" value="{{ item.item_recurs_months }}" type="number" class="input-field footer-text" disabled="disabled" readonly>
+                            <label for="item_recurs_months{{ item._id }}">Recurs</label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
+
 <script>
     function add_new_item() {
         var x = document.getElementById("form-new-item");
@@ -97,6 +159,16 @@
             x.style.display = "block";
         } else {
             x.style.display = "none";
+        }
+    }
+
+    function check_expiry(value) {
+        var expiry;
+        if (value) {
+            expiry = date.strftime('%Y-%m-%d');
+        } else {
+            expiry = "";
+        return string
         }
     }
         
