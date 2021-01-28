@@ -1,3 +1,4 @@
+/* Navigation bar  */
 .nav-wrapper {
     background-color: #ef6c00;
 }
@@ -7,16 +8,9 @@ nav li {
     background-color: #ef6c00;
 }
 
+/* General site, used ad-hoc */
 .centered-text {
     text-align: center;
-}
-
-.small-text {
-    font-size: xx-small;
-}
-
-.page-footer {
-    background-color: #ef6c00;
 }
 
 body {
@@ -33,6 +27,38 @@ body, html {
     height: 100%;
 }
 
+.small-text {
+    font-size: xx-small;
+}
+
+.page-footer {
+    background-color: #ef6c00;
+}
+
+i.icon-grey {
+    color: rgb(128, 128, 128);
+}
+
+i.icon-orange {
+    color: #ef6c00;
+}
+
+.my-links {
+    color: orange;
+    line-height: 2;
+}
+
+.flask-text {
+    color: orange;
+    line-height: 2;
+    text-align: center;
+}
+
+.page-header {
+    color: orange;
+}
+
+/* Header area including hero image */
 .header-block {
     position: relative;
 }
@@ -47,7 +73,6 @@ body, html {
     overflow: hidden;
 }
 
-/* Place text in the middle of the image */
 .hero-image .hero-text {
     max-width: 90%;
     text-align: center;
@@ -58,6 +83,13 @@ body, html {
     color: white;
 }
 
+.btn-floating {
+    background-color: #ef6c00;
+    margin-top: -35px;
+    margin-right: -60px;
+}
+
+/* Footer including social media */
 .fa {
   padding: 10px;
   font-size: 20px;
@@ -97,35 +129,7 @@ body, html {
   color: white;
 }
 
-i.icon-grey {
-    color: rgb(128, 128, 128);
-}
-
-i.icon-orange {
-    color: #ef6c00;
-}
-
-.flask-text {
-    color: orange;
-    line-height: 2;
-    text-align: center;
-}
-
-.my-links {
-    /* color: rgb(70, 70, 70); */
-    color: orange;
-    line-height: 2;
-    font-style: italic;
-}
-
-.page-header {
-    color: orange;
-}
-
-.demo-link {
-    color: orange;
-}
-
+/* Cards, adding and editing data */
 .input-field {
     color: rgb(128, 128, 128);
 }
@@ -151,25 +155,12 @@ i.icon-orange {
 }
 
 .row .title-class {
-    /* margin-left: 10px; */
     padding-left: 20px;
 }
 
 .row .tabs {
     background-color: rgb(240, 240, 240);
-    /* color: black; */
 }
-
-/* .carousel .carousel-item{
-  width:96%;
-} */
-
-/* .card {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-left: -50px;
-    margin-right: 50px;
-} */
 
 .card {
     border-radius: 6px;
@@ -197,12 +188,6 @@ i.icon-orange {
     margin-bottom: 0px !important;
 }
 
-.btn-floating {
-    background-color: #ef6c00;
-    margin-top: -35px;
-    margin-right: -60px;
-}
-
 #form-new-item {
     margin-top: 10px;
     border-radius: 6px;
@@ -212,6 +197,11 @@ i.icon-orange {
     margin: 15px 0px 10px 0px;
 }
 
+.enable-edit {
+    background-color: rgb(224, 241, 224);
+}
+
+/* Materialize tabs list */
 .tabs-header {
     padding: 60px 0px 15px, 0px;
     margin-top: 25px;
@@ -230,11 +220,5 @@ i.icon-orange {
     line-height: 1.5;
     font-style: italic;
     font-variant-caps: normal;
-    /* padding: 60px 0px 15px, 0px; */
-    /* margin-top: 5px; */
     border-radius: 6px;
-}
-
-.enable-edit {
-    background-color: rgb(224, 241, 224);
 }
