@@ -171,6 +171,10 @@ i.icon-orange {
     margin-right: 50px;
 } */
 
+.card {
+    border-radius: 6px;
+}
+
 .card-data .item-text {
     border-bottom: 0px solid green;
     padding-left: 10px;
@@ -201,18 +205,34 @@ i.icon-orange {
 
 #form-new-item {
     margin-top: 10px;
+    border-radius: 6px;
 }
 
 #btnAddNewItem {
     margin: 15px 0px 10px 0px;
 }
 
+.tabs-header {
+    padding: 60px 0px 15px, 0px;
+    margin-top: 25px;
+    border-radius: 30px;
+}
+
+#tabs-swipe {
+    border-radius: 8px;
+}
+
 #tabs-swipe .item-tab {
     background-color: rgba(128, 128, 128, 0.7);
     color: white !important;
     font-weight: bold;
+    font-size: larger;
     line-height: 1.5;
     font-style: italic;
+    font-variant-caps: normal;
+    /* padding: 60px 0px 15px, 0px; */
+    /* margin-top: 5px; */
+    border-radius: 6px;
 }
 
 .enable-edit {

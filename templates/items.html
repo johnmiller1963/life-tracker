@@ -51,9 +51,9 @@
 
     <br><br>
 
-    <div class="row">       
-        <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-1">
-            <li class="tab col"><a class="item-tab active" href="#renewables-swipe-1">Recurring Items</a></li>
+    <div class="row tabs-header">       
+        <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-2">
+            <li class="tab col"><a class="item-tab" href="#renewables-swipe-1">Recurring Items</a></li>
             <li class="tab col"><a class="item-tab" href="#warranties-swipe-2">Warranties</a></li>
         </ul>
     </div>
@@ -110,46 +110,51 @@
 
     <div id="warranties-swipe-2" class="col s12 tab-border">
         {% for item in items_warranties %}
-            <div id="{{ item._id }}" class="card">
-                <div class="row">
-                    <div class="card-title title-class col s12">
-                        <input id="item_title{{ item._id }}" class="input-field title-text col s4 m7 l9" value="{{ item.item_title }}" type="text" readonly>
-                        <a href="{{ url_for('delete_item', item_id=item._id) }}"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
-                        <a href="#"><i class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Edit this item">edit</i></a>
-                    </div>
-                </div>
-
-                <div class="card-data col s12">
-                    <div>
-                        <textarea id="item_description{{ item._id }}" class="input-field item-text materialize-textarea" readonly>{{ item.item_description }}</textarea>
-                    </div>
-                </div>
-
-                <div class="card-action card-footer col s12">
+            <!-- <form id="form-edit-item{{ item._id }}" method="POST" action="{{ url_for('items') }}"> -->
+            <form id="form-edit-item{{ item._id }}" method="POST" action="{{ url_for('edit_item', item_id=item._id) }}">
+                <div id="{{ item._id }}" class="card">
                     <div class="row">
-                        <div class="input-field col s2">
-                            <input id="item_cost{{ item._id }}" value="{{ item.item_cost }}" type="text" class="input-field footer-text" disabled="disabled" readonly>
-                            <label for="item_cost{{ item._id }}">Cost</label>
+                        <div class="card-title title-class col s12">
+                            <input id="item_title{{ item._id }}" name="item_title{{ item._id }}" class="input-field title-text col s6 m8 l10" maxlength="80" data-length="80" value="{{ item.item_title }}" type="text" readonly required="" aria-required="true" validate>
+                            <button id="btn_save_edit{{ item._id }}" class="icon-hidden right icon-save btn-small waves-effect waves-light orange darken-1 default" type="submit" name="action">Save<i class="material-icons right" tooltipped data-position="right" data-tooltip="Save this modified item">save</i>
+                            </button>
+                            <a href="{{ url_for('delete_item', item_id=item._id) }}" onclick="enable_deletes('{{ item._id }}'); return false;"><i id="icon_delete{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
+                            <a href="#" onclick="enable_edits('{{ item._id }}'); return false;"><i id="icon_edit{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Edit this item">edit</i></a>
                         </div>
-                        <div class="input-field col s4 center">
-                            <input id="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" validate readonly>
-                            <label for="item_start_date{{ item._id }}">Created</label>
+                    </div>
+
+                    <div class="card-data col s12">
+                        <div>
+                            <textarea id="item_description{{ item._id }}" name="item_description{{ item._id }}" class="input-field item-text materialize-textarea" maxlength="225" data-length="225" required="" aria-required="true" validate readonly>{{ item.item_description }}</textarea>
                         </div>
-                        <div class="input-field col s4 centered">
-                            {% if item.item_expiry_date %}
-                                <input id="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
-                            {% else %}
-                                <input id="item_expiry_date{{ item._id }}" value="Never" type="text" class="input-field footer-text datepicker" disabled="disabled" readonly>
-                            {% endif %}
-                            <label for="item_expiry_date{{ item._id }}">Expires</label>
-                        </div>
-                        <div class="input-field col s2 right">
-                            <input id="item_recurs_months{{ item._id }}" value="{{ item.item_recurs_months }}" type="number" class="input-field footer-text" disabled="disabled" readonly>
-                            <label for="item_recurs_months{{ item._id }}">Recurs</label>
+                    </div>
+
+                    <div class="card-action card-footer col s12">
+                        <div class="row">
+                            <div class="input-field col s2">
+                                <input id="item_cost{{ item._id }}" name="item_cost{{ item._id }}" value="{{ item.item_cost }}" type="text" class="input-field footer-text"  required="" aria-required="true" validate readonly>
+                                <label for="item_cost{{ item._id }}">Cost</label>
+                            </div>
+                            <div class="input-field col s4 center">
+                                <input id="item_start_date{{ item._id }}" name="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" validate readonly>
+                                <label for="item_start_date{{ item._id }}">Created</label>
+                            </div>
+                            <div class="input-field col s4 centered">
+                                {% if item.item_expiry_date %}
+                                    <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" readonly>
+                                {% else %}
+                                    <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}"  value="Never" type="text" class="input-field footer-text datepicker" readonly>
+                                {% endif %}
+                                <label for="item_expiry_date{{ item._id }}">Expires</label>
+                            </div>
+                            <div class="input-field col s2 right">
+                                <input id="item_recurs_months{{ item._id }}" name="item_recurs_months{{ item._id }}" value="{{ item.item_recurs_months }}" type="number" class="input-field footer-text" readonly>
+                                <label for="item_recurs_months{{ item._id }}">Recurs</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         {% endfor %}
     </div>
 
@@ -203,7 +208,6 @@
             $(cost).removeAttr('readonly');
             var start = document.getElementById("item_start_date" + key);
             $(start).removeAttr('readonly');
-            start = ""
             var expires = document.getElementById("item_expires_date" + key);
             $(expires).removeAttr('readonly');
             var recurs = document.getElementById("item_recurs_months" + key);
