@@ -74,14 +74,19 @@ i.icon-orange {
 }
 
 .hero-image .hero-text {
-    max-width: 90%;
+    font-size: 30px;
+    max-width: 95%;
     text-align: center;
     position: absolute;
-    top: 45px;
+    top: 20px;
     left: 50%;
     transform: translate(-50%);
     color: white;
 }
+
+/* .hero-text h5 {
+    font-size:2vw;
+} */
 
 .btn-floating {
     background-color: #ef6c00;
@@ -221,4 +226,12 @@ i.icon-orange {
     font-style: italic;
     font-variant-caps: normal;
     border-radius: 6px;
+}
+
+/* Media queries for better presentation */
+
+@media screen and (max-width: 600px) {
+  .hero-text h5 {
+        font-size: 15px;
+    }
 }

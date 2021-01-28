@@ -17,31 +17,32 @@
 
 <body>
     <header>
-        <div class="navbar-fixed">
+        <!-- <div class="navbar-fixed"> -->
             <nav>
                 <div class="nav-wrapper">
-                <!-- <a href="#!" class="brand-logo right">Logo</a> -->
+                <!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+                <!-- <a href="#" class="brand-logo left">Logo</a> -->
                 <ul class="left">
-                    <li><a href="{{ url_for('home') }}"><i class="active material-icons left hide-on-small-only">home</i>Home</a></li>
+                    <li><a href="{{ url_for('home') }}"><i class="active material-icons left hide-on-med-and-down">home</i>Home</a></li>
                     {% if session.user_email %}
-                        <li><a href="{{ url_for('logout') }}"><i class="material-icons left hide-on-small-only">exit_to_app</i>Logout</a></li>
-                        <li><a href="{{ url_for('items') }}"><i class="material-icons left hide-on-small-only">storage</i>My items</a></li>
+                        <li><a href="{{ url_for('logout') }}"><i class="material-icons left hide-on-med-and-down">exit_to_app</i>Logout</a></li>
+                        <li><a href="{{ url_for('items') }}"><i class="material-icons left hide-on-med-and-down">storage</i>My items</a></li>
                     {% else %}
-                        <li><a href="{{ url_for('logon') }}"><i class="material-icons left hide-on-small-only">folder_shared</i>Login</a></li>
+                        <li><a href="{{ url_for('logon') }}"><i class="material-icons left hide-on-med-and-down">folder_shared</i>Login</a></li>
+                        <li><a href="{{ url_for('register') }}"><i class="material-icons left hide-on-med-and-down">folder_special</i>Register</a></li>
+                        <li><a href="{{ url_for('demo') }}"><i class="material-icons left hide-on-med-and-down">sentiment_very_satisfied</i>Demo</a></li>
                     {% endif %}
-                    <li><a href="{{ url_for('register') }}"><i class="material-icons left hide-on-small-only">folder_special</i>Register</a></li>
-                    <li><a href="{{ url_for('demo') }}"><i class="material-icons left hide-on-small-only">sentiment_very_satisfied</i>Demo</a></li>
                 </ul>
                 </div>
             </nav>
-        </div>
+        <!-- </div> -->
     </header>
 
     <div class="header-block">
         <div class="hero-image">
             <img src="{{ url_for('static', filename='media/images/background-wide.jpg') }}" alt="Hero Image">
             <div class="hero-text centered">
-                <img src="{{ url_for('static', filename='media/images/logo_white.png') }}" alt="Logo Image">
+                <img class="responsive-img" src="{{ url_for('static', filename='media/images/logo_white.png') }}" alt="Logo Image">
                 <h5>Store years of bills, receipts and records in your <em>secure virtual wallet</em></h5>
             </div>
         </div>
