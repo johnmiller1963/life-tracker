@@ -1,6 +1,8 @@
 import os
 from dateutil.parser import parse
 from datetime import datetime
+# import locale
+# locale.setlocale( locale.LC_ALL, '' )
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
@@ -21,7 +23,7 @@ mongo = PyMongo(app)
 
 @app.route("/")
 @app.route("/home")
-def show_home():
+def home():
     return render_template("home.html")
 
 
@@ -34,7 +36,7 @@ def register():
 
         if existing_user:
             flash("User email already registered, please use a different email!")
-            print("User email already registered, please use a different email!")
+            # print("User email already registered, please use a different email!")
             return redirect(url_for("register"))
 
         register = {
@@ -50,6 +52,10 @@ def register():
 
         # put the new user into 'session' cookie
         session["user_email"] = request.form.get("user_email").lower()
+        #current_user_email = request.form.get("user_email").lower()
+        #return render_template('base.html', current_user_name=request.form.get("user_email").lower())
+
+        #sessionStorage.setItem('key', 'value')
         flash("User Registration Successful!")
         flash("Welcome, {}".format(
             request.form.get("user_display_name")))
@@ -95,11 +101,22 @@ def logon():
     return render_template("logon.html")
 
 
+@app.route("/demo")
+def demo():
+    session.clear()
+    session["user_email"] = "demo@life-tracker.co.uk"
+    flash("Now viewing our Demo account")
+    #flash(current_user_email)
+    # flash(session["user_email"])
+    return redirect(url_for(
+        "items", username=session["user_email"]))
+
+
 @app.route("/logout")
 def logout():
     session.clear()
     flash("User logged out successfully")
-    return redirect(url_for("show_home"))
+    return redirect(url_for("home"))
 
 
 @app.route("/items", methods=["GET", "POST"])
@@ -124,7 +141,7 @@ def items():
             "item_start_date": datetime.now(),
             "item_expiry_date": optional_expiry_date,
             "item_hide": "off",
-            "item_recurs_months": optional_recurs
+            "item_recurs_months": str(optional_recurs)
         }
         mongo.db.tbl_items.insert_one(one_new_item)
         flash("New item added successfully!")
@@ -137,12 +154,60 @@ def items():
 
 @app.route("/delete_item/<item_id>")
 def delete_item(item_id):
-    myquery = {"_id": ObjectId(item_id)}
-    newvalues = {"$set": {"item_hide": "on"}}
+    if session["user_email"] == "demo@life-tracker.co.uk":
+        flash("The demo account cannot delete items!")
+    else:
+        myquery = {"_id": ObjectId(item_id)}
+        newvalues = {"$set": {"item_hide": "on"}}
 
-    mongo.db.tbl_items.update_one(myquery, newvalues)
+        mongo.db.tbl_items.update_one(myquery, newvalues)
 
-    flash("Item deleted successfully!")
+        flash("Item deleted successfully!")
+    return redirect(url_for("items", username=session["user_email"]))
+
+
+@app.route("/edit_item/<item_id>", methods=["GET", "POST"])
+def edit_item(item_id):
+    if request.method == "POST":
+        # flash("Running the POST code now")
+        # request.data
+        # flash(item_id)
+        # test = request.form.get("item_title" + item_id)
+        # test = request.form["item_title" + item_id, ""]
+        # flash(test)
+        # return redirect(url_for("items", username=session["user_email"]))
+        # flash("editing" + item_id):
+        if session["user_email"] == "demo@life-tracker.co.uk":
+            flash("The demo account cannot edit items!")
+        else:
+            # flash("Edit any of the green cells, click save to keep the changes, F5 to cancel")
+            if request.form.get("item_expiry_date" + item_id):
+                optional_expiry_date = parse(request.form.get("item_expiry_date" + item_id))
+            else:
+                optional_expiry_date = ""
+
+            if request.form.get("item_recurs_months" + item_id):
+                optional_recurs = (request.form.get("item_recurs_months" + item_id))
+            else:
+                optional_recurs = "0"
+
+            this_item = request.form.get("item_title" + item_id)
+
+            edited_item = {"_id": ObjectId(item_id)}
+
+            edited_values = {"$set": {
+                "item_title": request.form.get("item_title" + item_id),
+                "item_description": request.form.get("item_description" + item_id),
+                "item_cost": request.form.get("item_cost" + item_id),
+                "item_start_date": datetime.now(),
+                "item_expiry_date": optional_expiry_date,
+                "item_hide": "off",
+                "item_recurs_months": str(optional_recurs)}
+            }
+
+            mongo.db.tbl_items.update_one(edited_item, edited_values)
+
+            flash(this_item + ", updated successfully!")
     return redirect(url_for("items", username=session["user_email"]))
 
 

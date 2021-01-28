@@ -135,6 +135,15 @@ i.icon-orange {
     padding-right: 8px;
 }
 
+.icon-hidden {
+    display: none;
+}
+
+.icon-save {
+    margin-top: 6px;
+    margin-right: 8px;
+}
+
 .title-text {
     font-weight: bold;
     padding-left: 100px;
@@ -204,4 +213,8 @@ i.icon-orange {
     font-weight: bold;
     line-height: 1.5;
     font-style: italic;
+}
+
+.enable-edit {
+    background-color: rgb(224, 241, 224);
 }
