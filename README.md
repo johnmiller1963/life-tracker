@@ -1,45 +1,165 @@
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
+# Life Tracker
 
-Welcome johnmiller1963,
+A database connected system to allow authenticated users to record items and tasks, each with an expiry date.  These tasks are presented to the user in descending expiry order.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+On a recent overseas holiday the airline lost my luggage, this was never recovered.  I was able to start a claims process with the airline and my own travel insurance, however
+quickly discovered that both organisations insist on submitted receipts for all items (mostly clothing) lost in my luggage.
 
-## Gitpod Reminders
+I don't know about you, but I couldn't find receipts for socks, T shirts etc that were bought years previously.  This is why the Life Tracker app was invented!
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+Created as a milestone project within my [Code Institute - Full stack web developer course](https://codeinstitute.net/full-stack-software-development-diploma-uk) course, the website demonstrates an interactive front-end.
 
-`python3 -m http.server`
+![Image of Site](static/media/images/readme/mockup.jpg)
 
-A blue button should appear to click: *Make Public*,
+## UX
 
-Another blue button should appear to click: *Open Browser*.
+Wireframes were produced in Balsamiq to display the desired look on various [devices](static/media/images/readme/wireframes.pdf) 
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+User stories guided the design and functionality of the system
 
-A blue button should appear to click: *Make Public*,
+- As someone who insures possessions I want a (permanent) record of when items were purchased
+- As someone who buys products with extended warranties I want to ensure value for money
+- As a user I want a hosted solution to allow simple task lists across multiple electronic devices
+- As a user I only want to see the most immediate items that need attention
+- As a user I don't want to keep track of paper receipts
+- I want to see a chronolocigal listing of upcoming events that need action
 
-Another blue button should appear to click: *Open Browser*.
+It is important for this application that users can logon and review upcoming items and add new items using a small display mobile phone while away from home.  The perhaps using a larger device display at home when time allows.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+## Features
 
-## Updates Since The Instructional Video
+Dynamic navigation menu that is always displayed, even on small devices.  Options change dynamically as a user authenticates with the application.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+Hero image and text is displayed on all pages (from base.html) to provide a consistent look and feel.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+On many applications users are not able to see data or how the system works before they have registered for an account and authenticated.  Life Tracker has a one button 'Demo Account' that will present the user with read-only sample data.  Demo users can add new tasks to the demo account
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+The system presents a Materialize tab control with different task lists in each, one for recurring items and a second for items that don't repeat.  Both lists are presented in chronilogical order.
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+Authentication is in place and registered users will only see their own items, they can edit all properties and delete items.  Deleted items are actually hidden not physically deleted.
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+All data is held in a dedicated MongoDB document database.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+### Features Left to Implement
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+A future attribute of the system is to be able to upload images associated with each task, like a mobile phone picture of a purchase receipt or attach a PDF of an extended warranty offer. 
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+The original wireframes show a basic dashboard of upcoming items and sum of expected costs in various time-frames, this would be a nice addition.
 
---------
+Its not essential for functionality but it would be sensible to add a search items feature.
 
-Happy coding!
+The application will need to be able to permanently delete items at some point, this might be 6 months after being deleted by the user who created it.  Alternatively 'deleted items' could be made visible to users who could then delete items from the database.
+
+## Technologies Used
+
+- [html5](http://www.w3.org/html)
+Building blocks of this site
+
+- [CSS3](https://www.w3.org/Style/CSS/)
+A simple mechanism for adding style (e.g., fonts, colors, spacing) to Web documents.
+
+- [Javascript](https://www.w3.org/wiki/The_web_standards_model_-_HTML_CSS_and_JavaScript#JavaScript_.E2.80.94_adding_behaviour_to_web_pages)
+Adding behaviour to web pages in particular building dynamic arrays of user chosen data to display in charts
+
+- [Python](https://https://www.python.org/)
+Python is a programming language that lets you work quickly and integrate systems more effectively
+
+- [Materialize CSS](https://materializecss.com//)
+Materialize CSS is an open source, mobile first toolkit for developing with HTML, CSS, and JS.
+
+- [JQuery](https://api.jquery.com/)
+The project uses JQuery to simplify DOM manipulation.
+
+- [Gitpod](https://gitpod.io/)
+Used as the primary IDE and to push committed changes back to Github
+
+- [Github](https://github.com/)
+On-line repository for all resources related to the finished site
+
+- [Heroku](https://heroku.com/)
+Used to host the finished site
+
+- [Images](https://tinyjpg.com/)
+The landing page serves 7 larger images, these have been optimised for file size to aid responsive loading of the home page.
+
+Additional Python components were added through the PIP install facility, the final list of components is;
+
+Package        Version
+-------------- -------
+blessed        1.17.12
+click          7.1.2
+cssselect      1.1.0
+dnspython      2.0.0
+Flask          1.1.2
+Flask-PyMongo  2.3.0
+flyingcircus   0.1.3.2
+itsdangerous   1.1.0
+lxml           4.6.2
+pip            21.0
+pymongo        3.11.2
+setuptools-scm 5.0.1
+Werkzeug       1.0.1
+
+Heroku requires a 'requirements.txt' file so that it knows which Python dependencies to be loaded for the build, the final file is;
+
+blessed==1.17.12
+click==7.1.2
+dnspython==2.0.0
+Flask==1.1.2
+Flask-PyMongo==2.3.0
+flyingcircus==0.1.3.2
+itsdangerous==1.1.0
+pymongo==3.11.2
+setuptools-scm==5.0.1
+Werkzeug==1.0.1
+python-dateutil==2.8.1
+
+- [Database](https://cloud.mongodb.com/)
+Document type database is utilised with 2 Collections, one for [Users](static/media/images/readme/users.jpg)
+And one for [item](static/media/images/readme/items.jpg) attributes
+
+
+## Testing
+
+CDN mechanisms were used to leverage functionality from external resources, all have been updated to the latest version available from their authors.  
+
+Note that Font-Awesome was used for social media icons as these were not available in the Materialize icons list, the latest version is 5.15.1 but this refused to operate correctly, so the system is currently using 4.7.0
+
+Manual testing was carried out on a variety of modern browsers, operating systems and devices of several sizes, testing revealed issues with overflow at small resolutions these issues have been fixed in the live version.  
+
+All navbar (menu) links and in page navigation works as designed.  
+
+Authentication (registration and logon) functionality was fully tested and working as designed.
+
+The size of all images were checked with 300kb each being an upper limit, the largest file used is 210kb with most being less than half of that.
+
+The html and css were validated on [W3](https://validator.w3.org/nu/) however many [errors](static/media/images/readme/errors.jpg) were identified as the result of using [Jinja2](https://pypi.org/project/Jinja2/) and [MaterialiseCSS](https://materializecss.com/)
+
+The application logic, routing and MongoDB interaction, written in Python was checked at [PEP8-Online](http://pep8online.com/), quite a few line length and white space errors were detected, all have now been [resolved](static/media/images/readme/pep8.jpg)
+
+Javscript is used to initialise some Materialize controls and on several html templates for client side logic and page specific functionality.
+
+For each of the user stories, specific tests were carried out:
+
+- As someone who insures possessions I want a (permanent) record of when items were purchased
+    * The system will deliver a record of every item tracked *
+- As someone who buys products with extended warranties I want to ensure value for money
+    * Within the warranties tab each item will appear higher up the list as it approaches it's expiry date, the user can then remove this item from the list when thay are happy that the warranty has been satidfied *
+- As a user I want a hosted solution to allow simple task lists across multiple electronic devices
+    * The system has been tested on a selection of devices from older Samsung mobile devices, to Applie iPad tablets and Windows 10 desktop PCs *
+- As a user I only want to see the most immediate items that need attention
+    * The default presentation order of 'expiring first' at the top of the list means only items requiring immediate attention are seen, though a user can scroll to see items further in the future *
+- As a user I don't want to keep track of paper receipts
+    * The application does not yet enable the on-line storage of images of paper receipts, it is setup to be able to do this in the future but the work involved was determined to be outside the scope of an MS3 project.  However the user can still take a photo of any receipt as they enter a new item *
+- I want to see a chronolocigal listing of upcoming events that need action
+    * The system will deliver this and in addition if the item recurs like annual tasks, the user can reset the expiry date for next year and that item will be immediately chronologically dropped down the action list *
+
+## Deployment
+
+The site resides in [Github](https://github.com/johnmiller1963/life-tracker) and the master repository is hosted on [Heroku](https://life-tracker-system.herokuapp.com/).  
+
+TBC
+
+## Credits
+
+TBC
