@@ -5,6 +5,7 @@
         <h5 class="center page-header">Enter your details here to create a new Life Tracker account</h5>
         <div class="row">
             <div class="col12 center">
+                <!-- quick jump to logon if required -->
                 <p>(Logon<a href="{{ url_for('logon') }}" class="my-links"> here </a>if you already have an account)</p>
             </div>
         </div>
@@ -31,6 +32,7 @@
                     <label for="user_password">Password (min 6 chars)</label>
                 </div>
             </div>
+            <!-- Re-enter password and check with JS -->
             <div class="row">
                 <div class="input-field col s10 offset-s1 m8 offset-m2 l6 offset-l3 center">
                     <i class="material-icons prefix icon-grey">verified_user</i>
@@ -43,6 +45,7 @@
                         These are the standard terms and conditions for using Life Tracker. <br> Only create your Life Tracker account if you trust us, but we are good people.
                     </p>
             </div>
+            <!-- Registering user must accept T&Cs before able to register -->
             <div class="row center">
                 <p>
                 <label>
@@ -59,6 +62,7 @@
 
 <script>
     function EnableRegistration() {
+    // Allow registration UNLESS any mandatory checks fail, then inform user
     var button = document.getElementById("btnTandCs");
     var email = document.getElementById("user_email").value;
     var username = document.getElementById("user_display_name").value;
@@ -91,6 +95,7 @@
         }
     }
 
+    // Basic email 'format' check, but better solution would be to send a validate account email
     function validateEmail(email) {
         var re = /\S+@\S+\.\S+/;
         return re.test(email);

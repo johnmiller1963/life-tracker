@@ -4,11 +4,11 @@
         <a href="#" onclick="add_new_item()" class="btn-floating top-fab waves-effect waves-light icon-grey btn-large center tooltipped" data-position="right" data-tooltip="Add a brand new item"><i class="material-icons">add</i></a>
     </div>
 
+    <!-- Hidden 'add new item' form, displayed onclick of 'add_new_item' -->
     <form id="form-new-item" style="display: none;" method="POST" action="{{ url_for('items') }}">
         <div id="card-new-item" class="row card z-depth-5">
                 <div class="col s12">
                     <div class="card-title title-class-new">
-                        <!-- <label for="new_item_title">Enter title of this item</label> -->
                         <label for="new_item_title">Enter title of this item</label>
                         <input id="new_item_title" name="new_item_title" class="input-field col s12" maxlength="80" data-length="80" placeholder="" type="text" required="" aria-required="true" validate>
                     </div>
@@ -51,6 +51,7 @@
 
     <br><br>
 
+    <!-- Materialize Tab control to switch between recurring and warranty lists -->
     <div class="row tabs-header">       
         <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-2">
             <li class="tab col"><a class="item-tab" href="#renewables-swipe-1">Recurring</a></li>
@@ -58,9 +59,9 @@
         </ul>
     </div>
 
+    <!-- First Tab showing items with recurs attribute > 0 -->
     <div id="renewables-swipe-1" class="col s12 tab-border">
         {% for item in items_renewables %}
-            <!-- <form id="form-edit-item{{ item._id }}" method="POST" action="{{ url_for('items') }}"> -->
             <form id="form-edit-item{{ item._id }}" method="POST" action="{{ url_for('edit_item', item_id=item._id) }}">
                 <div id="{{ item._id }}" class="card">
                     <div class="row">
@@ -90,6 +91,7 @@
                                 <label for="item_start_date{{ item._id }}">Created</label>
                             </div>
                             <div class="input-field col s4 centered">
+                                <!-- ID and name attribures are duplicated but switch means only 1 can be displayed -->
                                 {% if item.item_expiry_date %}
                                     <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled validate readonly>
                                 {% else %}
@@ -108,9 +110,10 @@
         {% endfor %}
     </div>
 
+    <!-- Second Tab for items with recurs value = 0 -->
     <div id="warranties-swipe-2" class="col s12 tab-border">
         {% for item in items_warranties %}
-            <!-- <form id="form-edit-item{{ item._id }}" method="POST" action="{{ url_for('items') }}"> -->
+            <!-- form-edit-item (and all other inputs) are repeated but made unique by the 'item._id' suffix -->
             <form id="form-edit-item{{ item._id }}" method="POST" action="{{ url_for('edit_item', item_id=item._id) }}">
                 <div id="{{ item._id }}" class="card">
                     <div class="row">
@@ -140,6 +143,7 @@
                                 <label for="item_start_date{{ item._id }}">Created</label>
                             </div>
                             <div class="input-field col s4 centered">
+                                <!-- ID and name attribures are duplicated but switch means only 1 can be displayed -->
                                 {% if item.item_expiry_date %}
                                     <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled validate readonly>
                                 {% else %}
@@ -160,6 +164,7 @@
 
 
 <script>
+    // Display hidden form at top of items page
     function add_new_item() {
         var x = document.getElementById("form-new-item");
         if (x.style.display === "none") {
@@ -169,34 +174,23 @@
         }
     }
 
-    function check_expiry(value) {
-        var expiry;
-        if (value) {
-            expiry = date.strftime('%Y-%m-%d');
-        } else {
-            expiry = "";
-        return string
-        }
-    }
-
+    // Check & alert browser if user is Demo account
     function enable_deletes(key) {
-        // alert("enable_deletes clicked - " + key)
         const urlParams = new URLSearchParams(window.location.search);
         const current_user_name = urlParams.get('username');
-        // alert(current_user_name);
         if (current_user_name=="demo@life-tracker.co.uk") {
             alert("You cannot delete items when using the Demo account!");
         }
     }
 
+    // Check & alert browser if user is Demo account
     function enable_edits(key) {
-        // alert("enable_edits clicked - " + key)
         const urlParams = new URLSearchParams(window.location.search);
         const current_user_name = urlParams.get('username');
-        // alert(current_user_name);
         if (current_user_name=="demo@life-tracker.co.uk") {
             alert("You cannot edit items when using the Demo account!");
         } else {
+            // Not Demo so enable input fields for editing & highlight to user
             var card = document.getElementById(key);
             card.classList.add("enable-edit");
             card.classList.add("z-depth-4");

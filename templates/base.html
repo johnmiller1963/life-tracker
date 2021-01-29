@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/font-awesome.min.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     {% block styles %}
@@ -17,11 +16,10 @@
 
 <body>
     <header>
-        <!-- <div class="navbar-fixed"> -->
+        <div class="navbar-fixed">
             <nav>
+                <!-- navbar doesn't use collapsable hamburger, instead tested as displaying on small devices -->
                 <div class="nav-wrapper">
-                <!-- <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
-                <!-- <a href="#" class="brand-logo left">Logo</a> -->
                 <ul class="left">
                     <li><a href="{{ url_for('home') }}"><i class="active material-icons left hide-on-med-and-down">home</i>Home</a></li>
                     {% if session.user_email %}
@@ -35,7 +33,7 @@
                 </ul>
                 </div>
             </nav>
-        <!-- </div> -->
+        </div>
     </header>
 
     <div class="header-block">
