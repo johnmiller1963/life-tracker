@@ -53,7 +53,7 @@
 
     <div class="row tabs-header">       
         <ul id="tabs-swipe" class="tabs tabs-fixed-width z-depth-2">
-            <li class="tab col"><a class="item-tab" href="#renewables-swipe-1">Recurring Items</a></li>
+            <li class="tab col"><a class="item-tab" href="#renewables-swipe-1">Recurring</a></li>
             <li class="tab col"><a class="item-tab" href="#warranties-swipe-2">Warranties</a></li>
         </ul>
     </div>
@@ -86,16 +86,16 @@
                                 <label for="item_cost{{ item._id }}">Cost</label>
                             </div>
                             <div class="input-field col s4 center">
-                                <input id="item_start_date{{ item._id }}" name="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" validate readonly>
+                                <input id="item_start_date{{ item._id }}" name="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled validate readonly>
                                 <label for="item_start_date{{ item._id }}">Created</label>
                             </div>
                             <div class="input-field col s4 centered">
                                 {% if item.item_expiry_date %}
-                                    <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" readonly>
+                                    <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled validate readonly>
                                 {% else %}
                                     <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}"  value="Never" type="text" class="input-field footer-text datepicker" readonly>
                                 {% endif %}
-                                <label for="item_expiry_date{{ item._id }}">Expires</label>
+                                <label for="item_expires_date{{ item._id }}">Expires</label>
                             </div>
                             <div class="input-field col s2 right">
                                 <input id="item_recurs_months{{ item._id }}" name="item_recurs_months{{ item._id }}" value="{{ item.item_recurs_months }}" type="number" class="input-field footer-text" readonly>
@@ -136,12 +136,12 @@
                                 <label for="item_cost{{ item._id }}">Cost</label>
                             </div>
                             <div class="input-field col s4 center">
-                                <input id="item_start_date{{ item._id }}" name="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" validate readonly>
+                                <input id="item_start_date{{ item._id }}" name="item_start_date{{ item._id }}" value="{{ item.item_start_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled validate readonly>
                                 <label for="item_start_date{{ item._id }}">Created</label>
                             </div>
                             <div class="input-field col s4 centered">
                                 {% if item.item_expiry_date %}
-                                    <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" readonly>
+                                    <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}" value="{{ item.item_expiry_date.strftime('%Y-%m-%d') }}" type="text" class="input-field footer-text datepicker" disabled validate readonly>
                                 {% else %}
                                     <input id="item_expiry_date{{ item._id }}" name="item_expiry_date{{ item._id }}"  value="Never" type="text" class="input-field footer-text datepicker" readonly>
                                 {% endif %}
@@ -180,7 +180,7 @@
     }
 
     function enable_deletes(key) {
-        // alert("enable_edits clicked - " + key)
+        // alert("enable_delets clicked - " + key)
         const urlParams = new URLSearchParams(window.location.search);
         const current_user_name = urlParams.get('username');
         // alert(current_user_name);
@@ -208,8 +208,10 @@
             $(cost).removeAttr('readonly');
             var start = document.getElementById("item_start_date" + key);
             $(start).removeAttr('readonly');
-            var expires = document.getElementById("item_expires_date" + key);
+            $(start).removeAttr('disabled');
+            var expires = document.getElementById("item_expiry_date" + key);
             $(expires).removeAttr('readonly');
+            $(expires).removeAttr('disabled');
             var recurs = document.getElementById("item_recurs_months" + key);
             $(recurs).removeAttr('readonly');
             var icon_edit = document.getElementById("icon_edit" + key);

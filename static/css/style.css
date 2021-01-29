@@ -84,10 +84,6 @@ i.icon-orange {
     color: white;
 }
 
-/* .hero-text h5 {
-    font-size:2vw;
-} */
-
 .btn-floating {
     background-color: #ef6c00;
     margin-top: -35px;
@@ -172,7 +168,7 @@ i.icon-orange {
 }
 
 .card-data .item-text {
-    border-bottom: 0px solid green;
+    border-bottom: 0px solid green !important;
     padding-left: 10px;
 }
 
@@ -221,7 +217,7 @@ i.icon-orange {
     background-color: rgba(128, 128, 128, 0.7);
     color: white !important;
     font-weight: bold;
-    font-size: larger;
+    font-size: 20px;
     line-height: 1.5;
     font-style: italic;
     font-variant-caps: normal;
@@ -231,7 +227,16 @@ i.icon-orange {
 /* Media queries for better presentation */
 
 @media screen and (max-width: 600px) {
-  .hero-text h5 {
+    .hero-text h5 {
+        font-size: 20px;
+    }
+
+    #tabs-swipe .item-tab {
         font-size: 15px;
+        padding-top: 5px;
+    }
+
+    .card .card-footer .row .input-field {
+        font-size: small;
     }
 }

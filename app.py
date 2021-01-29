@@ -86,8 +86,7 @@ def logon():
                 session["user_email"] = request.form.get("user_email").lower()
                 flash("Welcome back, {}".format(
                     existing_user["user_display_name"]))
-                return redirect(url_for(
-                    "items", username=session["user_email"]))
+                return redirect(url_for("items", username=session["user_email"]))
             else:
                 # invalid password match
                 flash("Incorrect Email and/or Password")
@@ -108,8 +107,7 @@ def demo():
     flash("Now viewing our Demo account")
     #flash(current_user_email)
     # flash(session["user_email"])
-    return redirect(url_for(
-        "items", username=session["user_email"]))
+    return redirect(url_for("items", username=session["user_email"]))
 
 
 @app.route("/logout")
@@ -199,7 +197,7 @@ def edit_item(item_id):
                 "item_title": request.form.get("item_title" + item_id),
                 "item_description": request.form.get("item_description" + item_id),
                 "item_cost": request.form.get("item_cost" + item_id),
-                "item_start_date": datetime.now(),
+                "item_start_date": parse(request.form.get("item_start_date" + item_id)),
                 "item_expiry_date": optional_expiry_date,
                 "item_hide": "off",
                 "item_recurs_months": str(optional_recurs)}
