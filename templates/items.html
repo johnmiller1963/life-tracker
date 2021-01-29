@@ -68,7 +68,7 @@
                             <input id="item_title{{ item._id }}" name="item_title{{ item._id }}" class="input-field title-text col s6 m8 l10" maxlength="80" data-length="80" value="{{ item.item_title }}" type="text" readonly required="" aria-required="true" validate>
                             <button id="btn_save_edit{{ item._id }}" class="icon-hidden right icon-save btn-small waves-effect waves-light orange darken-1 default" type="submit" name="action">Save<i class="material-icons right" tooltipped data-position="right" data-tooltip="Save this modified item">save</i>
                             </button>
-                            <a href="{{ url_for('delete_item', item_id=item._id) }}" onclick="enable_deletes('{{ item._id }}'); return false;"><i id="icon_delete{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
+                            <a href="{{ url_for('delete_item', item_id=item._id) }}" onclick="enable_deletes('{{ item._id }}');"><i id="icon_delete{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
                             <a href="#" onclick="enable_edits('{{ item._id }}'); return false;"><i id="icon_edit{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Edit this item">edit</i></a>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                             <input id="item_title{{ item._id }}" name="item_title{{ item._id }}" class="input-field title-text col s6 m8 l10" maxlength="80" data-length="80" value="{{ item.item_title }}" type="text" readonly required="" aria-required="true" validate>
                             <button id="btn_save_edit{{ item._id }}" class="icon-hidden right icon-save btn-small waves-effect waves-light orange darken-1 default" type="submit" name="action">Save<i class="material-icons right" tooltipped data-position="right" data-tooltip="Save this modified item">save</i>
                             </button>
-                            <a href="{{ url_for('delete_item', item_id=item._id) }}" onclick="enable_deletes('{{ item._id }}'); return false;"><i id="icon_delete{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
+                            <a href="{{ url_for('delete_item', item_id=item._id) }}" onclick="enable_deletes('{{ item._id }}');"><i id="icon_delete{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Delete this item!">delete</i></a>
                             <a href="#" onclick="enable_edits('{{ item._id }}'); return false;"><i id="icon_edit{{ item._id }}" class="material-icons item-icons icon-grey right tooltipped" data-position="right" data-tooltip="Edit this item">edit</i></a>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
     }
 
     function enable_deletes(key) {
-        // alert("enable_delets clicked - " + key)
+        // alert("enable_deletes clicked - " + key)
         const urlParams = new URLSearchParams(window.location.search);
         const current_user_name = urlParams.get('username');
         // alert(current_user_name);

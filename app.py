@@ -152,6 +152,7 @@ def items():
 
 @app.route("/delete_item/<item_id>")
 def delete_item(item_id):
+    # flash("In app.py delete_item function")
     if session["user_email"] == "demo@life-tracker.co.uk":
         flash("The demo account cannot delete items!")
     else:
@@ -206,6 +207,7 @@ def edit_item(item_id):
             mongo.db.tbl_items.update_one(edited_item, edited_values)
 
             flash(this_item + ", updated successfully!")
+        return redirect(url_for("items", username=session["user_email"]))
     return redirect(url_for("items", username=session["user_email"]))
 
 
