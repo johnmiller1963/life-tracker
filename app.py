@@ -23,6 +23,12 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 
+@app.errorhandler(*)
+def handle_foo_exception(error):
+    response = jsonify(error.to_dict())
+    response.status_code = error.status_code 
+
+
 @app.route("/")
 @app.route("/home")
 def home():
